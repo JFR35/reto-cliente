@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('clientes', function (Blueprint $table) {
             $table->id();
-            $table->string('autoridad')->unique();
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->unsignedBigInteger('direccion_id');
+            $table->foreign('direccion_id')->references('id')->on('direcciones')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('clientes');
     }
 };
